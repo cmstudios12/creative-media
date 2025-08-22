@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CMSTUDIOS — Start a Project</title>
+
+<!-- Remix Icons -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b0e14;
+  --bg-2:#0e1220;
+  --glass: rgba(255,255,255,.06);
+  --glass-2: rgba(255,255,255,.12);
+  --stroke: rgba(255,255,255,.12);
+  --text:#e9edf7;
+  --muted:#a9b1c3;
+  --cyan:#51e5ff;
+  --violet:#9b6bff;
+  --lime:#c7ff6b;
+  --rose:#ff6bb0;
+  --amber:#ffdd66;
+  --shadow: 0 20px 60px rgba(0,0,0,.35);
+  --radius: 22px;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font:16px/1.6 ui-sans-serif,system-ui,Segoe UI,Roboto,Inter,Arial;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 800px at 85% -10%, #2a1f57 0%, transparent 60%),
+    radial-gradient(900px 600px at -10% 90%, #0e4652 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  background-attachment: fixed;
+  scroll-behavior:smooth;
+}
+
+/* ===== Mobile-friendly tweaks ===== */
+@media (max-width:900px){
+  /* Reduce section padding so content fits smaller screens */
+  section { padding: 80px 20px 60px 20px; }
+
+  /* Collapse hero grid to single column */
+  #hero .hero-wrap { grid-template-columns:1fr; gap:16px; }
+
+  /* Reduce CTA button sizes */
+  .btn { padding:10px 14px; font-size:0.95rem; }
+  
+  /* Sidebar: shrink for smaller screens */
+  .sidebar { inset:0 auto 0 12px; padding:8px; gap:10px; }
+  .nav-dot { width:48px; height:48px; font-size:20px; }
+  .nav-dot .tip { left:56px; font-size:11px; }
+
+  /* Team grid collapse */
+  .team { grid-template-columns:repeat(2,1fr); gap:12px; }
+
+  /* Values grid collapse */
+  .values { grid-template-columns:repeat(2,1fr); gap:10px; }
+
+  /* Brand cards stack better */
+  .cards { grid-template-columns:1fr; gap:14px; }
+
+  /* Footer grid collapse */
+  .foot-grid { grid-template-columns:1fr; gap:14px; }
+}
+
+@media (max-width:500px){
+  /* Further adjustments for very small phones */
+  .team, .values { grid-template-columns:1fr; }
+  .cta-row { flex-direction:column; gap:8px; }
+  .split { grid-template-columns:1fr; }
+  section { padding:60px 12px 40px 12px; }
+}
+/* ===== Mobile sidebar bottom ===== */
+@media (max-width:900px){
+  .sidebar {
+    flex-direction:row;        /* horizontal instead of vertical */
+    bottom:20px;               /* stick near bottom */
+    left:50%;                  /* center horizontally */
+    transform:translateX(-50%);
+    border-radius:30px;        /* rounded pill shape */
+    padding:10px 14px;
+    gap:12px;
+  }
+
+  .nav-dot {
+    width:48px; height:48px;
+    font-size:20px;
+  }
+
+  .nav-dot .tip {
+    display:none;  /* hide tooltip on small screens */
+  }
+}
+
+
+/* Sections */
+section{
+  min-height:100svh;
+  display:grid; align-content:center; justify-items:center;
+  padding:100px 28px 80px 110px;
+}
+.section-inner{ width:min(800px,100%); display:grid; gap:26px }
+
+h1,h2{ margin:0; line-height:1.1; background:linear-gradient(90deg, var(--text) 0%, #e6e9ff 30%, #b1b7ff 60%, #78fff0 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+h1{font-size: clamp(32px, 6vw, 64px);}
+h2{font-size: clamp(26px, 4vw, 40px);}
+p{margin:0;color:var(--muted);}
+
+.glass{
+  background:var(--glass);
+  border:1px solid var(--stroke);
+  backdrop-filter: blur(14px);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:24px;
+  display:grid; gap:16px;
+  width:100%;
+}
+
+/* Form */
+form{ display:grid; gap:16px; margin-top:16px; }
+input, textarea{
+  padding:12px;
+  border-radius:14px;
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  font-size:16px;
+  width:100%;
+}
+textarea{ resize:vertical; min-height:120px; }
+button{
+  padding:12px 18px;
+  border-radius:14px;
+  font-weight:600;
+  color:#0b1018;
+  background:linear-gradient(90deg, var(--amber), var(--lime));
+  border:none;
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .25s ease;
+}
+button:hover{ transform:translateY(-2px); box-shadow:0 14px 40px rgba(199,255,107,.35); }
+
+/* Back button */
+.back-btn{
+  display:inline-block;
+  margin-bottom:16px;
+  padding:8px 14px;
+  border-radius:12px;
+  border:1px solid var(--stroke);
+  background:var(--glass-2);
+  color:var(--text);
+  text-decoration:none;
+  font-weight:600;
+  transition: transform .15s ease, box-shadow .25s ease;
+}
+.back-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(81,229,255,.2); }
+</style>
+</head>
+<body>
+
+<section>
+  <div class="section-inner glass">
+    <a class="back-btn" href="index.html"><i class="ri-arrow-left-line"></i> Back</a>
+    <h1>Start a Project</h1>
+    <p>Fill in the details below and we'll get back to you to discuss your project.</p>
+    
+    <form action="https://formspree.io/f/xzzvqpwl" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="company" placeholder="Company / Brand">
+      <textarea name="details" placeholder="Project Details" required></textarea>
+      <button type="submit">Send Project Request</button>
+    </form>
+  </div>
+</section>
+
+</body>
+</html>

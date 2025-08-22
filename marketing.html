@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CMSTUDIOS — Marketing Support</title>
+
+<!-- Remix Icons -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b0e14;
+  --bg-2:#0e1220;
+  --glass: rgba(255,255,255,.06);
+  --glass-2: rgba(255,255,255,.12);
+  --stroke: rgba(255,255,255,.12);
+  --text:#e9edf7;
+  --muted:#a9b1c3;
+  --cyan:#51e5ff;
+  --violet:#9b6bff;
+  --lime:#c7ff6b;
+  --rose:#ff6bb0;
+  --amber:#ffdd66;
+  --shadow: 0 20px 60px rgba(0,0,0,.35);
+  --radius: 22px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font:16px/1.6 ui-sans-serif,system-ui,Segoe UI,Roboto,Inter,Arial;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 800px at 85% -10%, #2a1f57 0%, transparent 60%),
+    radial-gradient(900px 600px at -10% 90%, #0e4652 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  background-attachment: fixed;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+}
+
+/* Sidebar */
+.sidebar{
+  position:fixed; inset:0 auto 0 20px; height:fit-content; margin:auto;
+  display:flex; flex-direction:column; gap:14px; z-index:50;
+  padding:12px; border-radius:999px;
+  background:var(--glass);
+  backdrop-filter: blur(16px);
+  border:1px solid var(--stroke);
+  box-shadow: var(--shadow);
+}
+.nav-dot{
+  width:56px;height:56px; border-radius:50%;
+  display:grid;place-items:center; font-size:22px; color:var(--muted);
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  border:1px solid var(--stroke);
+  transition:transform .25s ease, color .25s ease, background .25s ease, box-shadow .25s ease;
+  position:relative; cursor:pointer; text-decoration:none;
+}
+.nav-dot:hover{ color:var(--cyan); transform:translateX(4px); box-shadow:0 8px 30px rgba(81,229,255,.18) }
+.nav-dot.active{ color:var(--amber); box-shadow:0 0 0 2px rgba(255,221,102,.25) inset }
+.nav-dot .tip{
+  position:absolute; left:68px; top:50%; transform:translateY(-50%) translateX(-6px);
+  padding:6px 10px; font-size:12px; color:var(--text); white-space:nowrap;
+  background:var(--glass-2); backdrop-filter:blur(10px);
+  border:1px solid var(--stroke); border-radius:10px; opacity:0; pointer-events:none; transition:.25s ease;
+}
+.nav-dot:hover .tip{opacity:1; transform:translateY(-50%) translateX(0)}
+
+/* Sections */
+section{
+  min-height:100svh;
+  display:grid; align-content:center; justify-items:center;
+  padding:100px 28px 80px 110px;
+  position:relative;
+}
+.section-inner{ width:min(1200px,100%); display:grid; gap:26px }
+
+h1,h2{ margin:0; line-height:1.1; background:linear-gradient(90deg, var(--text) 0%, #e6e9ff 30%, #b1b7ff 60%, #78fff0 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+h1{font-size: clamp(32px, 6vw, 64px)}
+h2{font-size: clamp(26px, 4vw, 40px)}
+p{margin:0;color:var(--muted)}
+
+.glass{
+  background:var(--glass);
+  border:1px solid var(--stroke);
+  backdrop-filter: blur(14px);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:24px;
+  display:grid; gap:16px;
+}
+
+/* Cards Grid */
+.cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px }
+@media (max-width:1100px){ .cards{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:700px){ .cards{grid-template-columns:1fr} }
+.card{ padding:18px; display:grid; gap:8px; position:relative; overflow:hidden; }
+.card::after{
+  content:""; position:absolute; inset:-20% -20%; background:
+    radial-gradient(400px 140px at 0% 0%, rgba(155,107,255,.20), transparent 60%),
+    radial-gradient(400px 140px at 100% 100%, rgba(81,229,255,.18), transparent 60%);
+  pointer-events:none;
+}
+
+/* Back button */
+.back-btn{
+  display:inline-block;
+  margin-bottom:16px;
+  padding:8px 14px;
+  border-radius:12px;
+  border:1px solid var(--stroke);
+  background:var(--glass-2);
+  color:var(--text);
+  text-decoration:none;
+  font-weight:600;
+  transition: transform .15s ease, box-shadow .25s ease;
+}
+.back-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(81,229,255,.2); }
+
+/* Buttons */
+.btn{
+  appearance:none; border:0; cursor:pointer; text-decoration:none;
+  padding:12px 18px; border-radius:14px; font-weight:600; color:#0b1018;
+  background:rgb(255, 208, 0);
+  box-shadow:0 10px 30px rgba(199,255,107,.25);
+  transition:transform .15s ease, box-shadow .25s ease;
+}
+.btn:hover{ transform:translateY(-2px); box-shadow:0 14px 40px rgba(199,255,107,.35) }
+
+.reveal{ opacity:0; transform: translateY(14px); transition: .6s ease }
+.reveal.in{ opacity:1; transform:none }
+
+/* ===== Mobile-friendly tweaks ===== */
+@media (max-width:900px){
+  section { padding: 80px 20px 60px 20px; }
+  .sidebar { 
+    inset:auto 0 20px 50%; /* bottom center */
+    left:50%; bottom:20px;
+    transform:translateX(-50%);
+    flex-direction:row; 
+    border-radius:30px; 
+    padding:10px 14px; 
+    gap:12px; 
+  }
+  .nav-dot { width:48px; height:48px; font-size:20px; }
+  .nav-dot .tip { display:none; }
+  .cards{ grid-template-columns:1fr; gap:14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav class="sidebar">
+  <a class="nav-dot" href="index.html" aria-label="Home"><i class="ri-home-4-line"></i><span class="tip">Home</span></a>
+  <a class="nav-dot" href="#marketing" aria-label="Marketing"><i class="ri-megaphone-line"></i><span class="tip">Marketing</span></a>
+  <a class="nav-dot" href="#contact" aria-label="Contact"><i class="ri-mail-line"></i><span class="tip">Contact</span></a>
+</nav>
+
+<!-- Marketing Section -->
+<section id="marketing">
+  <div class="section-inner">
+    <a class="back-btn" href="index.html"><i class="ri-arrow-left-line"></i> Back</a>
+    <span class="kicker reveal">Marketing Support</span>
+    <h1 class="reveal">Boost Your Brand Visibility</h1>
+    <p class="reveal">We provide campaigns, media kits, content calendars, and paid social strategies to grow your audience effectively.</p>
+
+    <div class="cards reveal">
+      <a class="glass card">
+        <i class="ri-megaphone-line" style="font-size:22px;color:var(--cyan)"></i>
+        <strong>Campaign Management</strong>
+        <p>Strategic campaigns that target your ideal audience with measurable results.</p>
+      </a>
+      <a class="glass card">
+        <i class="ri-file-list-3-line" style="font-size:22px;color:var(--amber)"></i>
+        <strong>Media Kits</strong>
+        <p>Professional media kits to present your brand to partners and press.</p>
+      </a>
+      <a class="glass card">
+        <i class="ri-calendar-line" style="font-size:22px;color:var(--lime)"></i>
+        <strong>Content Calendars</strong>
+        <p>Organized content plans to ensure consistency across social platforms.</p>
+      </a>
+      <a class="glass card">
+        <i class="ri-bitcoin-line" style="font-size:22px;color:var(--violet)"></i>
+        <strong>Paid Social Ads</strong>
+        <p>Optimized paid campaigns for Facebook, Instagram, and more to boost reach.</p>
+      </a>
+    </div>
+
+    <div class="cta-row reveal" style="margin-top:24px;">
+      <a class="btn" href="form.html">Start a Project</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer (same as previous pages) -->
+<footer style="background:linear-gradient(180deg, rgba(255,255,255,.03), transparent); border-top:1px solid rgba(255,255,255,.12); padding:50px 28px 80px 110px;">
+  <div class="foot" style="width:min(1200px,100%); margin:0 auto; display:grid; gap:22px;">
+    <div class="foot-grid" style="display:grid; grid-template-columns:2fr 1fr 1fr 1.2fr; gap:18px;">
+      <!-- Brand + Social -->
+      <div class="glass" style="padding:16px; display:grid; gap:12px;">
+        <h4 style="margin:0 0 8px; color:#fff;">CMSTUDIOS</h4>
+        <p>Design • Photography • Videography • Marketing. We combine strategy and craft to create brands people remember.</p>
+        <div style="display:flex; gap:10px; margin-top:10px;">
+          <a href="#" aria-label="Instagram" style="text-decoration: none; color: #ffffff;"><i class="ri-instagram-line"></i></a>
+          <a href="#" aria-label="Facebook" style="text-decoration: none; color: #ffffff;"><i class="ri-facebook-circle-line"></i></a>
+          <a href="#" aria-label="YouTube" style="text-decoration: none; color: #ffffff;"><i class="ri-youtube-line"></i></a>
+          <a href="#" aria-label="LinkedIn" style="text-decoration: none; color: #ffffff;"><i class="ri-linkedin-box-line"></i></a>
+        </div>
+      </div>
+      <!-- Quick Links -->
+      <div class="glass" style="padding:16px; display:grid; gap:6px;">
+        <h4 style="margin:0 0 8px; color:#fff;">Quick Links</h4>
+        <a href="index.html" style="text-decoration: none; color: #ffffff;">Home</a>
+        <a href="index.html#about" style="text-decoration: none; color: #ffffff;">About</a>
+        <a href="index.html#services" style="text-decoration: none; color: #ffffff;">Services</a>
+        <a href="index.html#contact" style="text-decoration: none; color: #ffffff;">Contact</a>
+      </div>
+      <!-- Services -->
+      <div class="glass" style="padding:16px; display:grid; gap:6px;">
+        <h4 style="margin:0 0 8px; color:#fff;">Services</h4>
+        <a href="index.html#brand" style="text-decoration: none; color: #ffffff;">Brand Strategy</a>
+        <a href="index.html#identity" style="text-decoration: none; color: #ffffff;">Logo & Identity</a>
+        <a href="index.html#graphic" style="text-decoration: none; color: #ffffff;">Graphic Design</a>
+        <a href="index.html#videography" style="text-decoration: none; color: #ffffff;">Videography</a>
+        <a href="index.html#marketing" style="text-decoration: none; color: #ffffff;">Marketing Campaigns</a>
+      </div>
+      <!-- Contact + Newsletter -->
+      <div class="glass" style="padding:16px; display:grid; gap:12px;">
+        <h4 style="margin:0 0 8px; color:#fff;">Contact</h4>
+        <p><i class="ri-mail-line"></i> cmstudiosza@gmail.com</p>
+        <p><i class="ri-phone-line"></i> +27 81 840 1398</p>
+        <p><i class="ri-map-pin-line"></i> eMangweni, Nkomazi, Malelane, Mpumalanga, South Africa</p>
+        <form onsubmit="event.preventDefault(); alert('Subscribed!');" style="display:grid; gap:10px; margin-top:8px;">
+          <input type="email" required placeholder="Newsletter email" style="padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); color:#e9edf7;">
+          <button class="btn" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div style="height:1px; background:rgba(255,255,255,.12); margin:16px 0;"></div>
+
+    <div style="display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; color:var(--muted);">
+      <small>© <span id="year"></span> CMSTUDIOS. All rights reserved.</small>
+      <div style="display:flex; gap:12px;">
+        <a href="privacy.html" style="color:var(--muted)">Privacy Policy</a>
+        <a href="terms.html" style="color:var(--muted)">Terms & Conditions</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</footer>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Scrollspy for sidebar
+  const links = [...document.querySelectorAll('.nav-dot')];
+  const sections = [...document.querySelectorAll('section')];
+  const spy = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id = '#' + entry.target.id;
+        links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
+      }
+    })
+  }, { rootMargin: '-40% 0px -50% 0px', threshold:.01 });
+  sections.forEach(s=>spy.observe(s));
+</script>
+</body>
+</html>

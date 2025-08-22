@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CMSTUDIOS — Terms & Conditions</title>
+
+<!-- Remix Icons -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b0e14;
+  --bg-2:#0e1220;
+  --glass: rgba(255,255,255,.06);
+  --glass-2: rgba(255,255,255,.12);
+  --stroke: rgba(255,255,255,.12);
+  --text:#e9edf7;
+  --muted:#a9b1c3;
+  --cyan:#51e5ff;
+  --violet:#9b6bff;
+  --lime:#c7ff6b;
+  --rose:#ff6bb0;
+  --amber:#ffdd66;
+  --shadow: 0 20px 60px rgba(0,0,0,.35);
+  --radius: 22px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font:16px/1.6 ui-sans-serif,system-ui,Segoe UI,Roboto,Inter,Arial;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 800px at 85% -10%, #2a1f57 0%, transparent 60%),
+    radial-gradient(900px 600px at -10% 90%, #0e4652 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  background-attachment: fixed;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+}
+
+/* Sidebar same as main site */
+.sidebar{
+  position:fixed; inset:0 auto 0 20px; height:fit-content; margin:auto;
+  display:flex; flex-direction:column; gap:14px; z-index:50;
+  padding:12px; border-radius:999px;
+  background:var(--glass);
+  backdrop-filter: blur(16px);
+  border:1px solid var(--stroke);
+  box-shadow: var(--shadow);
+}
+.nav-dot{
+  width:56px;height:56px; border-radius:50%;
+  display:grid;place-items:center; font-size:22px; color:var(--muted);
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  border:1px solid var(--stroke);
+  transition:transform .25s ease, color .25s ease, background .25s ease, box-shadow .25s ease;
+  position:relative; cursor:pointer; text-decoration:none;
+}
+.nav-dot:hover{ color:var(--cyan); transform:translateX(4px); box-shadow:0 8px 30px rgba(81,229,255,.18) }
+.nav-dot.active{ color:var(--amber); box-shadow:0 0 0 2px rgba(255,221,102,.25) inset }
+.nav-dot .tip{
+  position:absolute; left:68px; top:50%; transform:translateY(-50%) translateX(-6px);
+  padding:6px 10px; font-size:12px; color:var(--text); white-space:nowrap;
+  background:var(--glass-2); backdrop-filter:blur(10px);
+  border:1px solid var(--stroke); border-radius:10px; opacity:0; pointer-events:none; transition:.25s ease;
+}
+.nav-dot:hover .tip{opacity:1; transform:translateY(-50%) translateX(0)}
+
+/* Sections */
+section{
+  min-height:auto;
+  display:grid; align-content:center; justify-items:center;
+  padding:60px 28px 50px 110px;
+  position:relative;
+}
+.section-inner{ width:min(1200px, 100%); display:grid; gap:18px }
+
+.kicker{letter-spacing:.18em; text-transform:uppercase; color:var(--muted); font-size:12px}
+h1,h2{margin:0; line-height:1.1;
+  background:linear-gradient(90deg, var(--text) 0%, #e6e9ff 30%, #b1b7ff 60%, #78fff0 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+h1{font-size: clamp(32px, 6vw, 64px)}
+h2{font-size: clamp(26px, 4vw, 40px)}
+
+p, li{margin:0; color:var(--muted)}
+
+ul{padding-left:18px; margin-top:6px; margin-bottom:12px;}
+
+/* Glass blocks */
+.glass{
+  background:var(--glass);
+  border:1px solid var(--stroke);
+  backdrop-filter: blur(14px);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:20px;
+}
+
+/* Footer same as main site */
+footer{
+  padding:50px 28px 80px 110px;
+  border-top:1px solid var(--stroke);
+  background:linear-gradient(180deg, rgba(255,255,255,.03), transparent);
+}
+.foot{ width:min(1200px,100%); margin:0 auto; display:grid; gap:22px }
+.foot-grid{ display:grid; grid-template-columns:2fr 1fr 1fr 1.2fr; gap:18px }
+@media (max-width:1000px){ .foot-grid{grid-template-columns:1fr 1fr} }
+@media (max-width:640px){ .foot-grid{grid-template-columns:1fr} }
+.foot h4{ margin:0 0 8px; color:#fff }
+.foot a{ color:var(--muted); text-decoration:none }
+.foot a:hover{ color:#fff }
+.sep{ height:1px; background:var(--stroke) }
+
+/* Reveal animation */
+.reveal{ opacity:0; transform: translateY(14px); transition: .6s ease }
+.reveal.in{ opacity:1; transform:none }
+
+@media (max-width:900px){
+  section { padding:40px 20px 30px 20px; }
+  .sidebar { left:50%; bottom:20px; transform:translateX(-50%); flex-direction:row; border-radius:30px; padding:10px 14px; gap:12px; }
+  .nav-dot { width:48px; height:48px; font-size:20px; }
+  .nav-dot .tip { display:none; }
+}
+/* ===== Mobile-friendly tweaks ===== */
+@media (max-width:900px){
+  section { padding: 80px 20px 60px 20px; }
+  .sidebar { 
+    inset:auto 0 20px 50%; /* bottom center */
+    left:50%; bottom:20px;
+    transform:translateX(-50%);
+    flex-direction:row; 
+    border-radius:30px; 
+    padding:10px 14px; 
+    gap:12px; 
+  }
+  .nav-dot { width:48px; height:48px; font-size:20px; }
+  .nav-dot .tip { display:none; }
+  .cards{ grid-template-columns:1fr; gap:14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav class="sidebar" aria-label="Section navigation">
+  <a class="nav-dot" href="index.html" aria-label="Home"><i class="ri-home-5-line"></i><span class="tip">Home</span></a>
+  <a class="nav-dot" href="#terms" aria-label="Terms & Conditions"><i class="ri-file-list-3-line"></i><span class="tip">Terms</span></a>
+  <a class="nav-dot" href="#contact" aria-label="Contact"><i class="ri-mail-line"></i><span class="tip">Contact</span></a>
+</nav>
+
+<!-- Terms & Conditions -->
+<section id="terms">
+  <div class="section-inner glass reveal" style="display:grid;gap:20px;">
+    <span class="kicker">Terms & Conditions</span>
+    <h1>CMSTUDIOS Website Terms of Use</h1>
+
+    <p>Welcome to CMSTUDIOS. By accessing or using our website, you agree to comply with and be bound by the following terms and conditions.</p>
+
+    <h2>Use of Website</h2>
+    <ul>
+      <li>You agree to use this website for lawful purposes only.</li>
+      <li>You may not reproduce, distribute, or exploit content without prior written consent.</li>
+      <li>We reserve the right to suspend or restrict access at our discretion.</li>
+    </ul>
+
+    <h2>Intellectual Property</h2>
+    <ul>
+      <li>All content, graphics, logos, and materials are owned by CMSTUDIOS.</li>
+      <li>Unauthorized use may violate copyright, trademark, and other laws.</li>
+    </ul>
+
+    <h2>Limitation of Liability</h2>
+    <p>CMSTUDIOS is not liable for any damages arising from the use of this website, including direct, indirect, incidental, or consequential losses.</p>
+
+    <h2>Third-Party Links</h2>
+    <p>Our website may contain links to external websites. We do not endorse or assume responsibility for these external sites.</p>
+
+    <h2>User Submissions</h2>
+    <ul>
+      <li>Any information or material you submit to CMSTUDIOS may be used by us without restriction.</li>
+      <li>You are responsible for ensuring you have rights to share content.</li>
+    </ul>
+
+    <h2>Privacy</h2>
+    <p>Your use of the website is also governed by our <a href="privacy.html" style="color: #ffd900; text-decoration: none; font-weight: bolder;">Privacy Policy</a>.</p>
+
+    <h2>Changes to Terms</h2>
+    <p>We may update these Terms & Conditions at any time. Your continued use of the website constitutes acceptance of the revised terms.</p>
+
+    <h2>Governing Law</h2>
+    <p>These terms are governed by the laws of South Africa. Any disputes will be subject to the courts of South Africa.</p>
+
+    <h2>Contact Us</h2>
+    <p>If you have any questions about these terms, please contact us at <a href="mailto:cmstudiosza@gmail.com" style="text-decoration: none; color: #ffc400; font-weight: bolder;">cmstudiosza@gmail.com</a> or call +27 81 840 1398.</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="foot">
+    <div class="foot-grid">
+      <div class="glass" style="padding:16px">
+        <h4>CMSTUDIOS</h4>
+        <p>Design • Photography • Videography • Marketing. We combine strategy and craft to create brands people remember.</p>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+          <a href="#" aria-label="Facebook"><i class="ri-facebook-circle-line"></i></a>
+          <a href="#" aria-label="YouTube"><i class="ri-youtube-line"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-box-line"></i></a>
+        </div>
+      </div>
+      <div class="glass" style="padding:16px">
+        <h4>Quick Links</h4>
+        <div style="display:grid">
+          <a href="index.html">Home</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="#terms">Terms & Conditions</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="glass" style="padding:16px">
+        <h4>Contact</h4>
+        <p><i class="ri-mail-line"></i> cmstudiosza@gmail.com</p>
+        <p><i class="ri-phone-line"></i> +27 81 840 1398</p>
+        <p><i class="ri-map-pin-line"></i> eMangweni, Nkomazi, Malelane, Mpumalanga, South Africa</p>
+      </div>
+    </div>
+    <div class="sep"></div>
+    <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;color:var(--muted)">
+      <small>© <span id="year"></span> CMSTUDIOS. All rights reserved.</small>
+      <div style="display:flex;gap:12px">
+        <a href="privacy.html" style="color:var(--muted)">Privacy Policy</a>
+        <a href="#terms" style="color:var(--muted)">Terms & Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>

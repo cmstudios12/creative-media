@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CMSTUDIOS — About & Capabilities</title>
+
+<!-- Remix Icons -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+
+<style>
+  :root{
+    /* Fresh, premium palette (not your older colors) */
+    --bg:#001242;
+    --bg-2:#220041;
+    --glass: rgba(255,255,255,.06);
+    --glass-2: rgba(255,255,255,.12);
+    --stroke: rgba(255,255,255,.12);
+    --text:#e9edf7;
+    --muted:#a9b1c3;
+    --cyan:#51e5ff;
+    --violet:#9b6bff;
+    --lime:#c7ff6b;
+    --rose:#ff6bb0;
+    --amber:#ffdd66;
+    --shadow: 0 20px 60px rgba(0,0,0,.35);
+    --radius: 22px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font:16px/1.6 ui-sans-serif,system-ui,Segoe UI,Roboto,Inter,Arial;
+    color:var(--text);
+    background:
+      radial-gradient(1200px 800px at 85% -10%, #2a1f57 0%, transparent 60%),
+      radial-gradient(900px 600px at -10% 90%, #0e4652 0%, transparent 60%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    background-attachment: fixed;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+  }
+  /* ===== Mobile-friendly tweaks ===== */
+@media (max-width:900px){
+  section { padding: 80px 20px 60px 20px; }
+
+  .sidebar { 
+    /* Move to bottom center */
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    flex-direction: row; 
+    border-radius: 30px; 
+    padding: 10px 14px; 
+    gap: 12px; 
+  }
+
+  .nav-dot { 
+    width: 48px; 
+    height: 48px; 
+    font-size: 20px; 
+  }
+
+  .nav-dot .tip { 
+    display: none; /* Hide tooltips on mobile */
+  }
+
+  .cards { 
+    grid-template-columns: 1fr; 
+    gap: 14px; 
+  }
+}
+
+
+@media (max-width:500px){
+  /* Further adjustments for very small phones */
+  .team, .values { grid-template-columns:1fr; }
+  .cta-row { flex-direction:column; gap:10px; }
+  .split { grid-template-columns:1fr; }
+  section { padding:60px 12px 40px 12px; }
+}
+
+  /* ===== Floating round sidebar (icons only) ===== */
+  .sidebar{
+    position:fixed; inset:0 auto 0 20px; height:fit-content; margin:auto;
+    display:flex; flex-direction:column; gap:14px; z-index:50;
+    padding:12px; border-radius:999px;
+    background:var(--glass);
+    backdrop-filter: blur(16px);
+    border:1px solid var(--stroke);
+    box-shadow: var(--shadow);
+  }
+  .nav-dot{
+    width:56px;height:56px; border-radius:50%;
+    display:grid;place-items:center; font-size:22px; color:var(--muted);
+    background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+    border:1px solid var(--stroke);
+    transition:transform .25s ease, color .25s ease, background .25s ease, box-shadow .25s ease;
+    position:relative; cursor:pointer; text-decoration:none;
+  }
+  .nav-dot:hover{ color:var(--cyan); transform:translateX(4px); box-shadow:0 8px 30px rgba(81,229,255,.18) }
+  .nav-dot.active{ color:var(--amber); box-shadow:0 0 0 2px rgba(255,221,102,.25) inset }
+
+  /* tooltips (name on hover) */
+  .nav-dot .tip{
+    position:absolute; left:68px; top:50%; transform:translateY(-50%) translateX(-6px);
+    padding:6px 10px; font-size:12px; color:var(--text); white-space:nowrap;
+    background:var(--glass-2); backdrop-filter:blur(10px);
+    border:1px solid var(--stroke); border-radius:10px; opacity:0; pointer-events:none; transition:.25s ease;
+  }
+  .nav-dot:hover .tip{opacity:1; transform:translateY(-50%) translateX(0)}
+
+  /* ===== Sections ===== */
+  section{
+    min-height:auto;
+    display:grid; align-content:center; justify-items:center;
+    padding:60px 28px 50px 110px; /* leave room for sidebar */
+    position:relative;
+  }
+  .section-inner{ width:min(1200px, 100%); display:grid; gap:18px }
+
+  .kicker{letter-spacing:.18em; text-transform:uppercase; color:var(--muted); font-size:12px}
+  h1,h2{
+    margin:0; line-height:1.1;
+    background:linear-gradient(90deg, var(--text) 0%, #e6e9ff 30%, #b1b7ff 60%, #78fff0 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  h1{font-size: clamp(32px, 6vw, 64px)}
+  h2{font-size: clamp(26px, 4vw, 40px)}
+
+  p{margin:0;color:var(--muted)}
+
+  /* glass blocks */
+  .glass{
+    background:var(--glass);
+    border:1px solid var(--stroke);
+    backdrop-filter: blur(14px);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+  /* Make the cards clickable and interactive */
+.cards a.card {
+  text-decoration: none; /* remove underline */
+  color: inherit; /* keep text color */
+  transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+  cursor: pointer;
+}
+
+/* Hover effect */
+.cards a.card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 25px 70px rgba(0,0,0,.45);
+  background: rgba(255,255,255,0.08); /* slightly brighter glass */
+}
+
+/* Icon highlight on hover */
+.cards a.card:hover i {
+  transform: scale(1.2);
+  transition: transform .3s ease, color .3s ease;
+  color: var(--cyan); /* you can also choose a gradient later */
+}
+
+/* Keep inner spacing consistent */
+.cards a.card strong {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.cards a.card p {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* Make responsive same as your original cards */
+@media (max-width:1100px){ 
+  .cards{ grid-template-columns:repeat(2,1fr); } 
+}
+@media (max-width:700px){ 
+  .cards{ grid-template-columns:1fr; } 
+}
+
+
+  /* ===== HERO ===== */
+  #hero .hero-wrap{
+    display:grid; gap:16px;
+    grid-template-columns: 1.1fr .9fr;
+  }
+  @media (max-width:980px){ #hero .hero-wrap{grid-template-columns:1fr} }
+  .tagline{font-size:18px}
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap}
+  .btn{
+    appearance:none; border:0; cursor:pointer; text-decoration:none;
+    padding:12px 18px; border-radius:14px; font-weight:600; color:#0b1018;
+    background:rgb(255, 187, 0);
+    box-shadow:0 10px 30px rgba(199,255,107,.25);
+    transition:transform .15s ease, box-shadow .25s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); box-shadow:0 14px 40px rgba(199,255,107,.35) }
+  .btn.ghost{
+    color:var(--text); background:transparent; border:1px solid var(--stroke)
+  }
+
+  .hero-card{
+    padding:24px; display:grid; gap:16px;
+    position:relative; overflow:hidden;
+  }
+  .hero-card::after{
+    content:""; position:absolute; inset: -40% -10% auto -10%; height:80%;
+    background: radial-gradient(600px 200px at 20% 20%, rgba(81,229,255,.25), transparent 60%),
+                radial-gradient(400px 160px at 80% 0%, rgba(155,107,255,.18), transparent 60%);
+    pointer-events:none;
+  }
+  .cards a.card {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+  cursor: pointer;
+}
+
+.cards a.card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 25px 70px rgba(0,0,0,.45);
+  background: rgba(255,255,255,0.08);
+}
+
+/* Green top banner */
+.cards a.card::before {
+  content: "Click to view";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: #4caf50; /* green */
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 0;
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.cards a.card:hover::before {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+  /* ===== VALUES ===== */
+  .values{ display:grid; grid-template-columns:repeat(6,1fr); gap:14px }
+  @media (max-width:1100px){ .values{grid-template-columns:repeat(3,1fr)} }
+  @media (max-width:680px){ .values{grid-template-columns:repeat(2,1fr)} }
+  .value{
+    padding:12px; display:grid; gap:6px; text-align:left;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .value i{font-size:22px}
+  .value strong{color:#fff}
+  .value:hover{ transform:translateY(-4px); box-shadow:0 14px 40px rgba(81,229,255,.16); border-color:rgba(81,229,255,.35) }
+
+  /* ===== VISION & MISSION ===== */
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:18px }
+  @media (max-width:980px){ .split{grid-template-columns:1fr} }
+  .panel{ padding:22px; display:grid; gap:10px }
+
+  /* ===== BRAND STRATEGY / SUPPORT ===== */
+  .cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px }
+  @media (max-width:1100px){ .cards{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:700px){ .cards{grid-template-columns:1fr} }
+  .card{
+    padding:18px; display:grid; gap:8px; position:relative; overflow:hidden;
+  }
+  .card::after{
+    content:""; position:absolute; inset:-20% -20%; background:
+      radial-gradient(400px 140px at 0% 0%, rgba(155,107,255,.20), transparent 60%),
+      radial-gradient(400px 140px at 100% 100%, rgba(81,229,255,.18), transparent 60%);
+    pointer-events:none;
+  }
+
+  /* ===== TEAM ===== */
+  .team{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px }
+  @media (max-width:1100px){ .team{grid-template-columns:repeat(3,1fr)} }
+  @media (max-width:800px){ .team{grid-template-columns:repeat(2,1fr)} }
+  .member{ padding:14px; display:grid; gap:10px; text-align:center }
+  .avatar{
+    width:100%; aspect-ratio:1/1; border-radius:14px; overflow:hidden;
+    background:linear-gradient(180deg, #1b2133, #0f1422);
+    border:1px solid var(--stroke);
+  }
+  .avatar img{ width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05) contrast(1.05) }
+  .member small{ color:var(--muted) }
+
+  /* ===== CTA STRIP ===== */
+  .cta-strip{
+    padding:20px; display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    border:1px dashed rgba(255,255,255,.18);
+  }
+
+  /* ===== Footer (full details) ===== */
+  footer{
+    padding:50px 28px 80px 110px;
+    border-top:1px solid var(--stroke);
+    background:linear-gradient(180deg, rgba(255,255,255,.03), transparent);
+  }
+  .foot{ width:min(1200px,100%); margin:0 auto; display:grid; gap:22px }
+  .foot-grid{ display:grid; grid-template-columns:2fr 1fr 1fr 1.2fr; gap:18px }
+  @media (max-width:1000px){ .foot-grid{grid-template-columns:1fr 1fr} }
+  @media (max-width:640px){ .foot-grid{grid-template-columns:1fr} }
+  .foot h4{ margin:0 0 8px; color:#fff }
+  .foot a{ color:var(--muted); text-decoration:none }
+  .foot a:hover{ color:#fff }
+  .sep{ height:1px; background:var(--stroke) }
+
+  /* ===== Reveal on scroll ===== */
+  .reveal{ opacity:0; transform: translateY(14px); transition: .6s ease }
+  .reveal.in{ opacity:1; transform:none }
+
+  /* ===== Mobile-friendly tweaks ===== */
+@media (max-width:900px){
+  section { padding: 80px 20px 60px 20px; }
+  .sidebar { 
+    inset:auto 0 20px 50%; /* bottom center */
+    left:50%; bottom:20px;
+    transform:translateX(-50%);
+    flex-direction:row; 
+    border-radius:30px; 
+    padding:10px 14px; 
+    gap:12px; 
+  }
+  .nav-dot { width:48px; height:48px; font-size:20px; }
+  .nav-dot .tip { display:none; }
+  .cards{ grid-template-columns:1fr; gap:14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar (icons only; labels on hover) -->
+<nav class="sidebar" aria-label="Section navigation">
+  <a class="nav-dot" href="#hero"    aria-label="Home"><i class="ri-home-5-line"></i><span class="tip">Home</span></a>
+  <a class="nav-dot" href="#values"  aria-label="Values"><i class="ri-shield-star-line"></i><span class="tip">Values</span></a>
+  <a class="nav-dot" href="#vision"  aria-label="Vision & Mission"><i class="ri-compass-3-line"></i><span class="tip">Vision & Mission</span></a>
+  <a class="nav-dot" href="#brand"   aria-label="Brand Strategy"><i class="ri-route-line"></i><span class="tip">Brand Strategy</span></a>
+  <a class="nav-dot" href="team.html"    aria-label="Team"><i class="ri-team-line"></i><span class="tip">Team</span></a>
+  <a class="nav-dot" href="#contact" aria-label="Contact"><i class="ri-mail-line"></i><span class="tip">Contact</span></a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="section-inner hero-wrap">
+    <div class="hero-card glass reveal">
+      <span class="kicker">CMSTUDIOS</span>
+      <h1>We design brands, craft content, and build campaigns that feel <em>alive</em>.</h1>
+      <p class="tagline">Graphic Design • Photography • Videography • Marketing | all under one studio for creative consistency and real business impact.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn">Start a Project</a>
+        <a href="#brand" class="btn ghost">See How We Work</a>
+      </div>
+    </div>
+    <div class="glass reveal" style="padding:0; overflow:hidden">
+      <!-- swap with a real studio shot / looped MP4 -->
+      <img src="cms.png" alt="Studio montage" style="display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:16/11">
+    </div>
+  </div>
+</section>
+
+<!-- WELCOME / INTRO (like the reference “Welcome to…” section) -->
+<section id="welcome">
+  <div class="section-inner">
+    <div class="glass panel reveal">
+      <span class="kicker">Welcome</span>
+      <h2>Authentic design, creative storytelling & digital innovation</h2>
+      <p>We collaborate with brands to uncover their spark and turn it into visuals that connect: from identity systems and campaign rollouts to cinematic content and scroll-stopping social. We help you choose the right mediums, then execute with precision.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES (grid chips like the reference list) -->
+<section id="values">
+  <div class="section-inner">
+    <span class="kicker reveal">Our Values</span>
+    <h2 class="reveal">Standards that keep our work sharp</h2>
+    <div class="values">
+      <div class="glass value reveal"><i class="ri-shield-check-line"></i><strong>Integrity</strong><p>Clear comms & honest delivery.</p></div>
+      <div class="glass value reveal"><i class="ri-timer-flash-line"></i><strong>Reliability</strong><p>On time. Every time.</p></div>
+      <div class="glass value reveal"><i class="ri-speed-up-line"></i><strong>Efficiency</strong><p>Smart workflows, fewer revisions.</p></div>
+      <div class="glass value reveal"><i class="ri-contrast-drop-2-line"></i><strong>Creativity</strong><p>Fresh, ownable ideas.</p></div>
+      <div class="glass value reveal"><i class="ri-focus-2-line"></i><strong>Precision</strong><p>Pixel-perfect craft.</p></div>
+      <div class="glass value reveal"><i class="ri-rocket-2-line"></i><strong>Effectiveness</strong><p>Design that moves metrics.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION & MISSION (two column like reference) -->
+<section id="vision">
+  <div class="section-inner split">
+    <div class="glass panel reveal">
+      <span class="kicker">Mission</span>
+      <h2>Make work that’s beautiful <em>and</em> effective</h2>
+      <p>We blend creative direction, strategic thinking and world-class craft to help clients grow, reach new audiences and evolve with the times.</p>
+    </div>
+    <div class="glass panel reveal">
+      <span class="kicker">Vision</span>
+      <h2>Be the studio brands trust for long-term impact</h2>
+      <ul style="margin:0;padding-left:18px;color:var(--muted)">
+        <li>Leaders in brand design & content in SA.</li>
+        <li>Work that’s meaningful and memorable.</li>
+        <li>Partnerships that last beyond one campaign.</li>
+        <li>Known for integrity, reliability & personal service.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND STRATEGY & CREATION / SUPPORT (cards + CTA) -->
+<section id="brand">
+  <div class="section-inner">
+    <span class="kicker reveal">Brand Strategy & Creation</span>
+    <h2 class="reveal">Build foundations, then scale with consistency</h2>
+    <div class="cards">
+      
+      <a href="discovery.html" class="glass card reveal">
+        <i class="ri-compasses-2-line" style="font-size:22px;color:var(--cyan)"></i>
+        <strong>Discovery & Direction</strong>
+        <p>Workshops, audience & competitor insights, positioning and tone.</p>
+      </a>
+
+      <a href="identity.html" class="glass card reveal">
+        <i class="ri-pantone-line" style="font-size:22px;color:var(--violet)"></i>
+        <strong>Identity Systems</strong>
+        <p>Logos, typography, color, grids, motion & usage guidelines.</p>
+      </a>
+
+      <a href="graphic.html" class="glass card reveal">
+        <i class="ri-brush-4-line" style="font-size:22px;color:var(--rose)"></i>
+        <strong>Graphic Design</strong>
+        <p>Posters, flyers, company profiles, brochures & infographics.</p>
+      </a>
+
+      <a href="photography.html" class="glass card reveal">
+        <i class="ri-camera-3-line" style="font-size:22px;color:var(--amber)"></i>
+        <strong>Photography</strong>
+        <p>Portraits, events, products & lifestyle shoots.</p>
+      </a>
+
+      <a href="videography.html" class="glass card reveal">
+        <i class="ri-movie-2-line" style="font-size:22px;color:var(--lime)"></i>
+        <strong>Videography</strong>
+        <p>Promos, short films, event highlights & social edits.</p>
+      </a>
+
+      <a href="marketing.html" class="glass card reveal">
+        <i class="ri-megaphone-line" style="font-size:22px;color:var(--cyan)"></i>
+        <strong>Marketing Support</strong>
+        <p>Campaigns, media kits, content calendars & paid social.</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner split">
+    <div class="glass panel reveal">
+      <span class="kicker">Get in touch</span>
+      <h2>Let’s build something unforgettable</h2>
+      <p>Tell us about your goals and we’ll map the best creative route—then deliver with craft and speed.</p>
+      <div style="display:grid;gap:6px;margin-top:8px;color:var(--muted)">
+        <div><i class="ri-mail-line"></i> cmstudiosza@gmail.com</div>
+        <div><i class="ri-phone-line"></i> +27 123 456 789</div>
+        <div><i class="ri-map-pin-line"></i> Johannesburg, South Africa</div>
+      </div>
+      <div class="cta-row" style="margin-top:12px">
+        <a class="btn" href="mailto:cmstudiosza@gmail.com?subject=CMSTUDIOS%20Project%20Enquiry">Email Us</a>
+        <a class="btn ghost" href="#brand">View Services</a>
+      </div>
+    </div>
+    <form class="glass panel reveal" onsubmit="event.preventDefault(); alert('Thanks! We will get back to you shortly.');">
+      <span class="kicker">Quick Enquiry</span>
+      <div style="display:grid;gap:10px">
+        <input required placeholder="Your name" style="padding:12px;border-radius:12px;border:1px solid var(--stroke);background:rgba(255,255,255,.04);color:var(--text)">
+        <input type="email" required placeholder="Email" style="padding:12px;border-radius:12px;border:1px solid var(--stroke);background:rgba(255,255,255,.04);color:var(--text)">
+        <textarea required rows="4" placeholder="Tell us about your project…" style="padding:12px;border-radius:12px;border:1px solid var(--stroke);background:rgba(255,255,255,.04);color:var(--text)"></textarea>
+        <button class="btn" type="submit">Send Enquiry</button>
+      </div>
+      <small style="color:var(--muted)">By submitting you agree to our terms & privacy.</small>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER: include “everything” -->
+<footer>
+  <div class="foot">
+    <div class="foot-grid">
+      <div class="glass" style="padding:16px">
+        <h4>CMSTUDIOS</h4>
+        <p>Design • Photography • Videography • Marketing. We combine strategy and craft to create brands people remember.</p>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+          <a href="#" aria-label="Facebook"><i class="ri-facebook-circle-line"></i></a>
+          <a href="#" aria-label="YouTube"><i class="ri-youtube-line"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-box-line"></i></a>
+        </div>
+      </div>
+
+      <div class="glass" style="padding:16px">
+        <h4>Quick Links</h4>
+        <div style="display:grid">
+          <a href="#hero">Home</a>
+          <a href="#welcome">About</a>
+          <a href="#brand">Services</a>
+          <a href="eam.html">Team</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+
+      <div class="glass" style="padding:16px">
+        <h4>Services</h4>
+        <div style="display:grid">
+          <a href="#brand">Brand Strategy</a>
+          <a href="#brand">Logo & Identity</a>
+          <a href="#brand">Graphic Design</a>
+          <a href="#brand">Photography</a>
+          <a href="#brand">Videography</a>
+          <a href="#brand">Marketing Campaigns</a>
+        </div>
+      </div>
+
+      <div class="glass" style="padding:16px">
+        <h4>Contact</h4>
+        <p><i class="ri-mail-line"></i> cmstudiosza@gmail.com</p>
+        <p><i class="ri-phone-line"></i> +27 81 840 1398</p>
+        <p><i class="ri-map-pin-line"></i> eMangweni, Nkomazi, Malelane, Mpumalanga, South Africa</p>
+        <form onsubmit="event.preventDefault(); alert('Subscribed!');" style="display:grid;gap:10px;margin-top:8px">
+          <input type="email" required placeholder="Newsletter email" style="padding:10px;border-radius:10px;border:1px solid var(--stroke);background:rgba(255,255,255,.04);color:var(--text)">
+          <button class="btn" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+    <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;color:var(--muted)">
+      <small>© <span id="year"></span> CMSTUDIOS. All rights reserved.</small>
+      <div style="display:flex;gap:12px">
+        <a href="privacy.html" style="color:var(--muted)">Privacy Policy</a>
+        <a href="terms.html" style="color:var(--muted)">Terms & Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Set year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Scrollspy for sidebar
+  const links = [...document.querySelectorAll('.nav-dot')];
+  const sections = [...document.querySelectorAll('section')];
+
+  const spy = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id = '#' + entry.target.id;
+        links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
+      }
+    })
+  }, { rootMargin: '-40% 0px -50% 0px', threshold:.01 });
+  sections.forEach(s=>spy.observe(s));
+</script>
+</body>
+</html>
