@@ -324,21 +324,55 @@
   .reveal{ opacity:0; transform: translateY(14px); transition: .6s ease }
   .reveal.in{ opacity:1; transform:none }
 
-  /* ===== Mobile-friendly tweaks ===== */
-@media (max-width:900px){
-  section { padding: 80px 20px 60px 20px; }
-  .sidebar { 
-    inset:auto 0 20px 50%; /* bottom center */
-    left:50%; bottom:20px;
-    transform:translateX(-50%);
-    flex-direction:row; 
-    border-radius:30px; 
-    padding:10px 14px; 
-    gap:12px; 
+   /* ===== Mobile-friendly tweaks ===== */
+@media (max-width: 900px) {
+  section {
+    padding: 80px 20px 60px 20px;
   }
-  .nav-dot { width:48px; height:48px; font-size:20px; }
-  .nav-dot .tip { display:none; }
-  .cards{ grid-template-columns:1fr; gap:14px; }
+
+  .sidebar {
+    inset: auto;
+    position: fixed;       /* fixes it at bottom */
+    bottom: 15px;          /* distance from bottom edge */
+    left: 50%;             /* center horizontally */
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    bottom: 30px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1); /* optional glassy effect */
+    backdrop-filter: blur(6px);
+    border-radius: 30px;   /* small rounded edges */
+    padding: 6px 10px;     /* smaller padding so it's not big */
+    gap: 8px;              /* smaller gap between icons */
+    z-index: 1000;
+  }
+
+  .nav-dot {
+    width: 40px;           /* smaller icon */
+    height: 40px;
+    font-size: 18px;       /* smaller icon size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.2s;
+  }
+
+  .nav-dot:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+
+  .nav-dot .tip {
+    display: none;         /* hide text on mobile */
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
 }
 </style>
 </head>
@@ -585,3 +619,4 @@
 </script>
 </body>
 </html>
+
