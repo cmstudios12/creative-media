@@ -1,431 +1,916 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CMSTUDIOS — Photography Services</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photography Portfolio | CMSTUDIOS</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0e0e10;
+      --panel: #151519;
+      --glass: rgba(255, 255, 255, 0.08);
+      --white: #fff;
+      --rose: #ff4d6d;
+      --cyan: #4dd0e1;
+      --violet: #9b5de5;
+      --amber: #ffb300;
+      --lime: #aeea00;
+      --teal: #34d399;
+      --muted: #a4a4ad;
+      --radius: 16px;
+    }
 
-<!-- Remix Icons -->
-<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    * {
+      box-sizing: border-box
+    }
 
-<style>
-:root{
-  --bg:#0b0e14;
-  --bg-2:#0e1220;
-  --glass: rgba(255,255,255,.06);
-  --glass-2: rgba(255,255,255,.12);
-  --stroke: rgba(255,255,255,.12);
-  --text:#e9edf7;
-  --muted:#a9b1c3;
-  --cyan:#51e5ff;
-  --violet:#9b6bff;
-  --lime:#c7ff6b;
-  --rose:#ff6bb0;
-  --amber:#ffdd66;
-  --shadow: 0 20px 60px rgba(0,0,0,.35);
-  --radius: 22px;
-}
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, Segoe UI, Roboto, Inter, Arial;
+      background:
+        radial-gradient(900px 600px at 110% -10%, #2a1f57 0%, transparent 60%),
+        radial-gradient(900px 600px at -10% 110%, #0e4652 0%, transparent 60%),
+        linear-gradient(180deg, #0b0e14 0%, #0e1220 100%);
+      color: var(--white);
+      line-height: 1.6;
+    }
 
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font:16px/1.5 ui-sans-serif,system-ui,Segoe UI,Roboto,Inter,Arial;
-  color:var(--text);
-  background:
-    radial-gradient(1200px 800px at 85% -10%, #2a1f57 0%, transparent 60%),
-    radial-gradient(900px 600px at -10% 90%, #0e4652 0%, transparent 60%),
-    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-  background-attachment: fixed;
-  overflow-x:hidden;
-  scroll-behavior:smooth;
-}
-/* ===== Mobile-friendly tweaks ===== */
-@media (max-width:900px){
-  /* Reduce section padding so content fits smaller screens */
-  section { padding: 80px 20px 60px 20px; }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
 
-  /* Collapse hero grid to single column */
-  #hero .hero-wrap { grid-template-columns:1fr; gap:16px; }
+    /* Header */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      background: var(--glass);
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, .12);
+    }
 
-  /* Reduce CTA button sizes */
-  .btn { padding:10px 14px; font-size:0.95rem; }
-  
-  /* Sidebar: shrink for smaller screens */
-  .sidebar { inset:0 auto 0 12px; padding:8px; gap:10px; }
-  .nav-dot { width:48px; height:48px; font-size:20px; }
-  .nav-dot .tip { left:56px; font-size:11px; }
+    h1 {
+      margin: 16px 0 6px;
+      font-size: clamp(28px, 5vw, 46px);
+      background: linear-gradient(90deg, #fff, #b7c0ff, #78fff0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.1;
+    }
 
-  /* Team grid collapse */
-  .team { grid-template-columns:repeat(2,1fr); gap:12px; }
+    .notice {
+      background: linear-gradient(270deg, #ff4e50, #f9d423, #24c6dc, #5433ff, #ff0099);
+      background-size: 1000% 1000%;
+      color: white;
+      font-weight: 700;
+      text-align: center;
+      padding: 14px 24px;
+      border-radius: 12px;
+      margin: 20px auto;
+      width: fit-content;
+      animation: gradientShift 6s ease infinite, fadeInOut 5s infinite;
+    }
 
-  /* Values grid collapse */
-  .values { grid-template-columns:repeat(2,1fr); gap:12px; }
+    .notice p {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.8px;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+    }
 
-  /* Brand cards stack better */
-  .cards { grid-template-columns:1fr; gap:14px; }
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
 
-  /* Footer grid collapse */
-  .foot-grid { grid-template-columns:1fr; gap:14px; }
-}
+      50% {
+        background-position: 100% 50%;
+      }
 
-@media (max-width:500px){
-  /* Further adjustments for very small phones */
-  .team, .values { grid-template-columns:1fr; }
-  .cta-row { flex-direction:column; gap:10px; }
-  .split { grid-template-columns:1fr; }
-  section { padding:60px 12px 40px 12px; }
-}
-/* ===== Mobile sidebar bottom ===== */
-@media (max-width:900px){
-  .sidebar {
-    flex-direction:row;        /* horizontal instead of vertical */
-    bottom:20px;               /* stick near bottom */
-    left:50%;                  /* center horizontally */
-    transform:translateX(-50%);
-    border-radius:30px;        /* rounded pill shape */
-    padding:10px 14px;
-    gap:12px;
-  }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
 
-  .nav-dot {
-    width:48px; height:48px;
-    font-size:20px;
-  }
+    @keyframes fadeInOut {
 
-  .nav-dot .tip {
-    display:none;  /* hide tooltip on small screens */
-  }
-}
+      0%,
+      100% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      20%,
+      80% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
 
 
-/* Sidebar */
-.sidebar{
-  position:fixed; inset:0 auto 0 20px; height:fit-content; margin:auto;
-  display:flex; flex-direction:column; gap:14px; z-index:50;
-  padding:12px; border-radius:999px;
-  background:var(--glass);
-  backdrop-filter: blur(16px);
-  border:1px solid var(--stroke);
-  box-shadow: var(--shadow);
-}
-.nav-dot{
-  width:56px;height:56px; border-radius:50%;
-  display:grid;place-items:center; font-size:22px; color:var(--muted);
-  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-  border:1px solid var(--stroke);
-  transition:transform .25s ease, color .25s ease, background .25s ease, box-shadow .25s ease;
-  position:relative; cursor:pointer; text-decoration:none;
-}
-.nav-dot:hover{ color:var(--cyan); transform:translateX(4px); box-shadow:0 8px 30px rgba(81,229,255,.18) }
-.nav-dot.active{ color:var(--amber); box-shadow:0 0 0 2px rgba(255,221,102,.25) inset }
-.nav-dot .tip{
-  position:absolute; left:68px; top:50%; transform:translateY(-50%) translateX(-6px);
-  padding:6px 10px; font-size:12px; color:var(--text); white-space:nowrap;
-  background:var(--glass-2); backdrop-filter:blur(10px);
-  border:1px solid var(--stroke); border-radius:10px; opacity:0; pointer-events:none; transition:.25s ease;
-}
-.nav-dot:hover .tip{opacity:1; transform:translateY(-50%) translateX(0)}
+    .lead {
+      color: #cfd3e6;
+      max-width: 800px;
+    }
 
-/* Sections */
-section{
-  min-height:80svh; /* reduced space */
-  display:grid; align-content:start; justify-items:center;
-  padding:80px 28px 40px 110px; /* tighter spacing */
-  position:relative;
-}
-.section-inner{ width:min(1200px,100%); display:grid; gap:20px }
+    /* Category cards */
+    .cards {
+      display: grid;
+      gap: 18px;
+      margin-top: 28px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 
-h1,h2{ margin:0; line-height:1.1; background:linear-gradient(90deg, var(--text) 0%, #e6e9ff 30%, #b1b7ff 60%, #78fff0 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
-h1{font-size: clamp(32px, 6vw, 60px)}
-h2{font-size: clamp(26px, 4vw, 38px)}
-p{margin:0;color:var(--muted)}
+    @media (max-width: 1024px) {
+      .cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
 
-.glass{
-  background:var(--glass);
-  border:1px solid var(--stroke);
-  backdrop-filter: blur(14px);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:20px;
-  display:grid; gap:12px;
-}
+    @media (max-width: 700px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-/* Cards Grid */
-.cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px }
-@media (max-width:1100px){ .cards{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:700px){ .cards{grid-template-columns:1fr} }
-.card{ padding:18px; display:grid; gap:8px; position:relative; overflow:hidden; }
-.card::after{
-  content:""; position:absolute; inset:-20% -20%; background:
-    radial-gradient(400px 140px at 0% 0%, rgba(155,107,255,.20), transparent 60%),
-    radial-gradient(400px 140px at 100% 100%, rgba(81,229,255,.18), transparent 60%);
-  pointer-events:none;
-}
-/* Back button */
-.back-btn{
-  display:inline-block;
-  margin-bottom:16px;
-  padding:8px 14px;
-  border-radius:12px;
-  border:1px solid var(--stroke);
-  background:var(--glass-2);
-  color:var(--text);
-  text-decoration:none;
-  font-weight:600;
-  transition: transform .15s ease, box-shadow .25s ease;
-}
-.back-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(81,229,255,.2); }
-/* Hover overlay text */
-.card:hover::before{
-  content:"Click to Request";
-  position:absolute; top:8px; left:8px; color:#00ff00; font-weight:600;
-  font-size:14px; background:rgba(0,0,0,0.3); padding:4px 8px; border-radius:8px;
-}
-/* Buttons */
-.btn{
-  appearance:none; border:0; cursor:pointer; text-decoration:none;
-  padding:12px 18px; border-radius:14px; font-weight:600; color:#0b1018;
-  background:rgb(255, 208, 0);
-  box-shadow:0 10px 30px rgba(199,255,107,.25);
-  transition:transform .15s ease, box-shadow .25s ease;
-}
-.btn:hover{ transform:translateY(-2px); box-shadow:0 14px 40px rgba(199,255,107,.35) }
+    @media (max-width: 460px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
 
-.reveal{ opacity:0; transform: translateY(14px); transition: .6s ease }
-.reveal.in{ opacity:1; transform:none }
-/* ===== Mobile-friendly tweaks ===== */
-@media (max-width:900px){
-  section { padding: 80px 20px 60px 20px; }
-  .sidebar { 
-    inset:auto 0 20px 50%; /* bottom center */
-    left:50%; bottom:20px;
-    transform:translateX(-50%);
-    flex-direction:row; 
-    border-radius:30px; 
-    padding:10px 14px; 
-    gap:12px; 
-  }
-  .nav-dot { width:48px; height:48px; font-size:20px; }
-  .nav-dot .tip { display:none; }
-  .cards{ grid-template-columns:1fr; gap:14px; }
-}
-</style>
+    .card {
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: var(--radius);
+      padding: 16px;
+      cursor: pointer;
+      transition: transform .18s ease, background .3s ease, box-shadow .3s ease;
+      backdrop-filter: blur(10px);
+      display: grid;
+      gap: 6px;
+      text-align: left;
+      min-height: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .25);
+    }
+
+    .card i {
+      font-size: 24px;
+    }
+
+    .card strong {
+      font-size: 16px;
+    }
+
+    .card p {
+      color: #cfd3e6;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* Gallery sections */
+    .gallery-section {
+      display: none;
+      margin-top: 34px;
+      padding: 18px;
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: var(--radius);
+    }
+
+    .gallery-section.active {
+      display: block;
+    }
+
+    .gallery-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .gallery-title {
+      margin: 0;
+      font-size: clamp(22px, 3.5vw, 28px);
+    }
+
+    .gallery-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .pill {
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .06);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .gallery-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @media (max-width: 1024px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 460px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .gallery-grid figure {
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: #101015;
+    }
+
+    .gallery-grid img {
+      display: block;
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      transition: transform .3s ease;
+      cursor: zoom-in;
+    }
+
+    .gallery-grid figure:hover img {
+      transform: scale(1.04);
+    }
+
+    .caption {
+      position: absolute;
+      left: 8px;
+      bottom: 8px;
+      font-size: 12px;
+      background: rgba(0, 0, 0, .45);
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+
+    /* Buttons */
+    .btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 800;
+      color: #0b1018;
+      background: rgb(255, 208, 0);
+      box-shadow: 0 10px 30px rgba(199, 255, 107, .25);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Form Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      z-index: 1000;
+      background: rgba(0, 0, 0, .78);
+      padding: 20px;
+    }
+
+    .modal.active {
+      display: grid;
+    }
+
+    .modal-card {
+      width: min(420px, 96vw);
+      background: #15151b;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 18px;
+      padding: 22px;
+      color: #fff;
+      display: grid;
+      gap: 10px;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 22px;
+      cursor: pointer;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .modal-card input,
+    .modal-card textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .06);
+      color: #fff;
+    }
+
+    /* Lightbox for images */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .95);
+      display: none;
+      z-index: 1100;
+    }
+
+    .lightbox.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 90vh;
+      border-radius: 12px;
+    }
+
+    .lightbox .close {
+      position: fixed;
+      top: 12px;
+      right: 16px;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Helpers */
+    .muted {
+      color: var(--muted);
+    }
+
+    .spacer {
+      height: 24px;
+    }
+
+    .contact-card {
+      grid-column: span 2;
+      /* makes it take 2 columns in the grid */
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-card h3 {
+      margin-top: 10px;
+      color: #333;
+    }
+
+    .contact-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- Sidebar -->
-<nav class="sidebar">
-  <a class="nav-dot" href="index.html" aria-label="Home"><i class="ri-home-4-line"></i><span class="tip">Home</span></a>
-  <a class="nav-dot" href="#photography" aria-label="Photography"><i class="ri-camera-3-line"></i><span class="tip">Photography</span></a>
-  <a class="nav-dot" href="#contact" aria-label="Contact"><i class="ri-mail-line"></i><span class="tip">Contact</span></a>
-</nav>
-
-<!-- Photography Section -->
-<section id="photography">
-  <div class="section-inner">
+  <div class="wrap">
     <a class="back-btn" href="index.html"><i class="ri-arrow-left-line"></i> Back</a>
-    <span class="kicker reveal">Photography</span>
-    <h1 class="reveal">Capturing Moments, Crafting Stories</h1>
-    <p class="reveal">From portraits to events and product shots, we create professional photography that reflects your brand’s identity.</p>
+    <h1>Our Portfolio</h1>
+    <p class="lead">Browse our categories, view sample work, and request a shoot. Click a category to reveal its
+      gallery. Click any photo to view it large.</p>
 
-    <div class="cards reveal">
-      <div class="glass card">
-        <i class="ri-user-3-line" style="font-size:22px;color:var(--cyan)"></i>
-        <strong>Portraits</strong>
-        <p>Professional individual and team portraits that showcase personality.</p>
-      </div>
-      <div class="glass card">
-        <i class="ri-calendar-event-line" style="font-size:22px;color:var(--violet)"></i>
-        <strong>Event Photography</strong>
-        <p>Capture the essence of corporate events, launches, and celebrations.</p>
-      </div>
-      <div class="glass card">
-        <i class="ri-camera-line" style="font-size:22px;color:var(--rose)"></i>
-        <strong>Product Shoots</strong>
-        <p>High-quality product images optimized for ecommerce and marketing.</p>
-      </div>
-      <div class="glass card">
-        <i class="ri-landscape-line" style="font-size:22px;color:var(--amber)"></i>
-        <strong>Lifestyle Photography</strong>
-        <p>Authentic lifestyle shots that resonate with your target audience.</p>
-      </div>
-      <div class="glass card">
-        <i class="ri-camera-flash-line" style="font-size:22px;color:var(--lime)"></i>
-        <strong>Studio Shoots</strong>
-        <p>Controlled lighting and composition for professional-grade images.</p>
-      </div>
-      <div class="glass card">
-        <i class="ri-briefcase-4-line" style="font-size:22px;color:var(--cyan)"></i>
-        <strong>Corporate Imagery</strong>
-        <p>Brand-focused photography for company websites and reports.</p>
-      </div>
+    <div class="notice">
+      <p>✨ Click any of the categories below to view our portfolio ✨</p>
     </div>
 
-    <div class="cta-row reveal" style="margin-top:20px;">
-      <a class="btn" href="#contact">Start a Project</a>
-    </div>
-  </div>
-</section>
 
-<!-- Contact Section -->
-<section id="contact">
-  <div class="section-inner">
-    <div class="glass reveal">
-      <span class="kicker">Get in Touch</span>
-      <h2>Let's Capture Your Vision</h2>
-      <p>Contact us to discuss your photography needs and start creating lasting visuals.</p>
-      <div class="cta-row" style="margin-top:16px;">
-        <a class="btn" href="mailto:cmstudiosza@gmail.com">Email Us</a>
+    <!-- CATEGORY CARDS -->
+    <div class="cards" id="categoryCards">
+      <div class="card" data-target="wedding"><i class="ri-hearts-line"
+          style="color:var(--rose)"></i><strong>Wedding</strong>
+        <p>Love & joy of your big day.</p>
+      </div>
+      <div class="card" data-target="studio"><i class="ri-music-line" style="color:var(--cyan)"></i><strong>Church
+          Services</strong>
+        <p>Clean, controlled, professional.</p>
+      </div>
+      <div class="card" data-target="matric"><i class="ri-ball-pen-line" style="color:var(--violet)"></i><strong>Matric
+          Dance</strong>
+        <p>Matric farewell memories.</p>
+      </div>
+      <div class="card" data-target="lobola"><i class="ri-hand-heart-line"
+          style="color:var(--amber)"></i><strong>Lobola</strong>
+        <p>Traditional ceremony moments.</p>
+      </div>
+      <div class="card" data-target="individuals"><i class="ri-user-line"
+          style="color:var(--lime)"></i><strong>Potraits</strong>
+        <p>Personal portraits that pop.</p>
+      </div>
+      <div class="card" data-target="funeral">
+        <img src="pregi.png" alt="Pregnancy Icon" style="width:40px; height:40px; vertical-align:middle; color: white;">
+        <strong>Pregnancy Photoshoot</strong>
+        <p>Respectful, dignified coverage.</p>
+      </div>
+
+      <div class="card" data-target="graduation"><i class="ri-graduation-cap-line"
+          style="color:var(--violet)"></i><strong>Graduation</strong>
+        <p>Celebrate academic wins.</p>
+      </div>
+      <div class="card" data-target="birthday"><i class="ri-cake-2-line"
+          style="color:var(--teal)"></i><strong>Birthday</strong>
+        <p>Fun, vibrant, unforgettable.</p>
       </div>
     </div>
-  </div>
-</section>
-  <!-- Location Section (unchanged) -->
-<section id="location">
-  <div class="section-inner">
-    <span class="kicker reveal">Our Location</span>
-    <p class="reveal">Find us in the heart of Mpumalanga for all your creative needs.</p>
-    <div class="map-container glass reveal">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13434.234287261056!2d31.990946!3d-25.471096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ee61d798fdfd36d%3A0x3a9ed2f3e2fba8e7!2sMalelane%2C%20Mpumalanga%2C%20South%20Africa!5e0!3m2!1sen!2sza!4v1692669671234!5m2!1sen!2sza" 
-        width="100%" 
-        height="450" 
-        style="border:0; border-radius:22px;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-  </div>
-</section>
-<!-- Footer -->
-<footer style="background:linear-gradient(180deg, rgba(255,255,255,.03), transparent); border-top:1px solid rgba(255,255,255,.12); padding:50px 28px 80px 110px;">
-  <div class="foot" style="width:min(1200px,100%); margin:0 auto; display:grid; gap:22px;">
-    <div class="foot-grid" style="display:grid; grid-template-columns:2fr 1fr 1fr 1.2fr; gap:18px;">
-      <!-- Brand + Social -->
-      <div class="glass" style="padding:16px; display:grid; gap:12px;">
-        <h4 style="margin:0 0 8px; color:#fff;">CMSTUDIOS</h4>
-        <p>Design • Photography • Videography • Marketing. We combine strategy and craft to create brands people remember.</p>
-        <div style="display:flex; gap:10px; margin-top:10px;">
-          <a href="#" aria-label="Instagram" style="text-decoration: none; color: #ffffff;"><i class="ri-instagram-line"></i></a>
-          <a href="#" aria-label="Facebook" style="text-decoration: none; color: #ffffff;"><i class="ri-facebook-circle-line"></i></a>
-          <a href="#" aria-label="YouTube" style="text-decoration: none; color: #ffffff;"><i class="ri-youtube-line"></i></a>
-          <a href="#" aria-label="LinkedIn" style="text-decoration: none; color: #ffffff;"><i class="ri-linkedin-box-line"></i></a>
+
+    <div class="spacer"></div>
+
+    <!-- GALLERIES (replace image src with your real files) -->
+    <!-- Wedding -->
+    <section id="wedding" class="gallery-section">
+      <div class="gallery-header">
+        <h2 class="gallery-title">Wedding Gallery</h2>
+        <div class="gallery-actions">
+          <button class="pill" onclick="openForm('Wedding')"><i class="ri-send-plane-2-line"></i> Request
+            Wedding</button>
         </div>
       </div>
-      <!-- Quick Links -->
-      <div class="glass" style="padding:16px; display:grid; gap:6px;">
-        <h4 style="margin:0 0 8px; color:#fff;">Quick Links</h4>
-        <a href="#hero" style="text-decoration: none; color: #ffffff;">Home</a>
-        <a href="#about" style="text-decoration: none; color: #ffffff;">About</a>
-        <a href="#services" style="text-decoration: none; color: #ffffff;">Services</a>
-        <a href="#contact" style="text-decoration: none; color: #ffffff;">Contact</a>
+      <p class="muted">Elegant coverage of your ceremony, couple portraits, family moments & reception highlights.</p>
+      <div class="gallery-grid">
+        <figure><img src="wed1.jpg" alt="Wed 1"></figure>
+        <figure><img src="wed2.jpg" alt="Wed 2"></figure>
+        <figure><img src="wed3.jpg" alt="Wed 3"></figure>
+        <figure><img src="wed4.jpg" alt="Wed 4"></figure>
+        <figure><img src="wed5.jpg" alt="Wed 5"></figure>
+        <figure><img src="wed6.jpg" alt="Wed 6"></figure>
+        <figure><img src="wed7.jpg" alt="Wed 7"></figure>
+        <figure><img src="wed8.jpg" alt="Wed 8"></figure>
+        <figure><img src="wed9.jpg" alt="Wed 9"></figure>
+        <figure><img src="wed10.jpg" alt="Wed 10"></figure>
+        <figure><img src="wed11.jpg" alt="Wed 11"></figure>
+        <figure><img src="wed12.jpg" alt="Wed 12"></figure>
+        <figure><img src="wed13.jpg" alt="Wed 13"></figure>
+        <figure><img src="wed14.jpg" alt="Wed 14"></figure>
+        <figure><img src="wed15.jpg" alt="Wed 15"></figure>
+        <figure><img src="wed16.jpg" alt="Wed 16"></figure>
+        <figure><img src="wed17.jpg" alt="Wed 17"></figure>
+        <figure><img src="wed18.jpg" alt="Wed 18"></figure>
+        <figure><img src="wed19.jpg" alt="Wed 19"></figure>
+        <figure><img src="wed20.jpg" alt="Wed 20"></figure>
+        <figure><img src="wed21.jpg" alt="Wed 21"></figure>
+        <figure><img src="wed22.jpg" alt="Wed 22"></figure>
+        <figure><img src="wed23.jpg" alt="Wed 23"></figure>
+        <figure><img src="wed24.jpg" alt="Wed 24"></figure>
+        <figure><img src="wed25.jpg" alt="Wed 25"></figure>
+        <figure><img src="wed26.jpg" alt="Wed 26"></figure>
+        <figure><img src="wed27.jpg" alt="Wed 27"></figure>
+        <figure><img src="wed28.jpg" alt="Wed 28"></figure>
+        <figure><img src="wed29.jpg" alt="Wed 29"></figure>
       </div>
-      <!-- Services -->
-      <div class="glass" style="padding:16px; display:grid; gap:6px;">
-        <h4 style="margin:0 0 8px; color:#fff;">Services</h4>
-        <a href="#brand" style="text-decoration: none; color: #ffffff;">Brand Strategy</a>
-        <a href="#brand" style="text-decoration: none; color: #ffffff;">Logo & Identity</a>
-        <a href="#brand" style="text-decoration: none; color: #ffffff;">Graphic Design</a>
-        <a href="#videography" style="text-decoration: none; color: #ffffff;">Videography</a>
-        <a href="#marketing" style="text-decoration: none; color: #ffffff;">Marketing Campaigns</a>
+
+    </section>
+
+    <!-- Studio -->
+    <section id="studio" class="gallery-section">
+      <div class="gallery-header">
+        <h2 class="gallery-title">Church Services</h2>
+        <div class="gallery-actions">
+          <button class="pill" onclick="openForm('Church Service')"><i class="ri-send-plane-2-line"></i> Request Church
+            Services</button>
+        </div>
       </div>
-      <!-- Contact + Newsletter -->
-      <div class="glass" style="padding:16px; display:grid; gap:12px;">
-        <h4 style="margin:0 0 8px; color:#fff;">Contact</h4>
-        <p><i class="ri-mail-line"></i> cmstudiosza@gmail.com</p>
-        <p><i class="ri-phone-line"></i> +27 81 840 1398</p>
-        <p><i class="ri-map-pin-line"></i> eMangweni, Nkomazi, Malelane, Mpumalanga, South Africa</p>
-        <form onsubmit="event.preventDefault(); alert('Subscribed!');" style="display:grid; gap:10px; margin-top:8px;">
-          <input type="email" required placeholder="Newsletter email" style="padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); color:#e9edf7;">
-          <button class="btn" type="submit">Subscribe</button>
-        </form>
+      <p class="muted">Professional photography capturing worship, events, portraits, and ministry moments with care and
+        creativity.</p>
+      <div class="gallery-grid">
+        <figure><img src="church1.jpg" alt="Church 1"></figure>
+        <figure><img src="church2.jpg" alt="Church 2"></figure>
+        <figure><img src="church3.jpg" alt="Church 3"></figure>
+        <figure><img src="church4.jpg" alt="Church 4"></figure>
+        <figure><img src="church5.jpg" alt="Church 5"></figure>
+        <figure><img src="church6.jpg" alt="Church 6"></figure>
+        <figure><img src="church7.jpg" alt="Church 7"></figure>
+        <figure><img src="church8.jpg" alt="Church 8"></figure>
+        <figure><img src="church9.jpg" alt="Church 9"></figure>
+        <figure><img src="church10.jpg" alt="Church 10"></figure>
+        <figure><img src="church11.jpg" alt="Church 11"></figure>
+        <figure><img src="church12.jpg" alt="Church 12"></figure>
+        <figure><img src="church13.jpg" alt="Church 13"></figure>
+        <figure><img src="church14.jpg" alt="Church 14"></figure>
+        <figure><img src="church15.jpg" alt="Church 15"></figure>
+        <figure><img src="church16.jpg" alt="Church 16"></figure>
+        <figure><img src="church17.jpg" alt="Church 17"></figure>
+        <figure><img src="church18.jpg" alt="Church 18"></figure>
+        <figure><img src="church19.jpg" alt="Church 19"></figure>
+        <figure><img src="church20.jpg" alt="Church 20"></figure>
+        <figure><img src="church21.jpg" alt="Church 21"></figure>
+        <figure><img src="church22.jpg" alt="Church 22"></figure>
+        <figure><img src="church23.jpg" alt="Church 23"></figure>
+        <figure><img src="church24.jpg" alt="Church 24"></figure>
+        <figure><img src="church25.jpg" alt="Church 25"></figure>
+        <figure><img src="church26.jpg" alt="Church 26"></figure>
+        <figure><img src="church27.jpg" alt="Church 27"></figure>
+        <figure><img src="church28.jpg" alt="Church 28"></figure>
+        <figure><img src="church29.jpg" alt="Church 29"></figure>
+        <figure><img src="church30.jpg" alt="Church 30"></figure>
+        <figure><img src="church31.jpg" alt="Church 31"></figure>
+        <figure><img src="church32.jpg" alt="Church 32"></figure>
+        <figure><img src="church33.jpg" alt="Church 33"></figure>
+        <figure><img src="church34.jpg" alt="Church 34"></figure>
+        <figure><img src="church35.jpg" alt="Church 35"></figure>
+        <figure><img src="church36.jpg" alt="Church 36"></figure>
+        <figure><img src="church37.jpg" alt="Church 37"></figure>
+        <figure><img src="church38.jpg" alt="Church 38"></figure>
+        <figure><img src="church39.jpg" alt="Church 39"></figure>
+        <figure><img src="church40.jpg" alt="Church 40"></figure>
+        <figure><img src="church41.jpg" alt="Church 41"></figure>
+        <figure><img src="church42.jpg" alt="Church 42"></figure>
+        <figure><img src="church43.jpg" alt="Church 43"></figure>
+        <figure><img src="church44.jpg" alt="Church 44"></figure>
+        <figure><img src="church45.jpg" alt="Church 45"></figure>
+        <figure><img src="church46.jpg" alt="Church 46"></figure>
+        <figure><img src="church47.jpg" alt="Church 47"></figure>
+        <figure><img src="church48.jpg" alt="Church 48"></figure>
+        <figure><img src="church49.jpg" alt="Church 49"></figure>
+        <figure><img src="church50.jpg" alt="Church 50"></figure>
+        <figure><img src="church51.jpg" alt="Church 51"></figure>
+        <figure><img src="church52.jpg" alt="Church 52"></figure>
+        <figure><img src="church53.jpg" alt="Church 53"></figure>
+        <figure><img src="church54.jpg" alt="Church 54"></figure>
+        <figure><img src="church55.jpg" alt="Church 55"></figure>
+        <figure><img src="church56.jpg" alt="Church 56"></figure>
+        <figure><img src="church57.jpg" alt="Church 57"></figure>
+        <figure><img src="church58.jpg" alt="Church 58"></figure>
+        <figure><img src="church59.jpg" alt="Church 59"></figure>
+        <figure><img src="church60.jpg" alt="Church 60"></figure>
+        <figure><img src="church61.jpg" alt="Church 61"></figure>
+        <figure><img src="church62.jpg" alt="Church 62"></figure>
+        <figure><img src="church63.jpg" alt="Church 63"></figure>
+        <figure><img src="church64.jpg" alt="Church 64"></figure>
+        <figure><img src="church65.jpg" alt="Church 65"></figure>
+        <figure><img src="church66.jpg" alt="Church 66"></figure>
       </div>
+
+    </section>
+
+    <!-- Matric Dance -->
+    <section id="matric" class="gallery-section">
+      <div class="gallery-header">
+        <h2 class="gallery-title">Matric Dance Gallery</h2>
+        <div class="gallery-actions">
+          <button class="pill" onclick="openForm('Matric Dance')"><i class="ri-send-plane-2-line"></i> Request Matric
+            Dance</button>
+        </div>
+      </div>
+      <p class="muted">Glam portraits, arrivals, couples & group memories from your big night.</p>
+      <div class="gallery-grid">
+        <figure><img src="matric1.jpg" alt="Matric 1"></figure>
+        <figure><img src="matric2.jpg" alt="Matric 2"></figure>
+        <figure><img src="matric3.jpg" alt="Matric 3"></figure>
+        <figure><img src="matric4.jpg" alt="Matric 4"></figure>
+        <figure><img src="matric5.jpg" alt="Matric 5"></figure>
+        <figure><img src="matric6.jpg" alt="Matric 6"></figure>
+        <figure><img src="matric7.jpg" alt="Matric 7"></figure>
+        <figure><img src="matric8.jpg" alt="Matric 8"></figure>
+        <figure><img src="matric9.jpg" alt="Matric 9"></figure>
+        <figure><img src="matric10.jpg" alt="Matric 10"></figure>
+        <figure><img src="matric11.jpg" alt="Matric 11"></figure>
+        <figure><img src="matric12.jpg" alt="Matric 12"></figure>
+        <figure><img src="matric13.jpg" alt="Matric 13"></figure>
+        <figure><img src="matric14.jpg" alt="Matric 14"></figure>
+        <figure><img src="matric15.jpg" alt="Matric 15"></figure>
+        <figure><img src="matric16.jpg" alt="Matric 16"></figure>
+      </div>
+
+    </section>
+
+    <!-- Lobola -->
+    <section id="lobola" class="gallery-section">
+      <div class="gallery-header">
+        <h2 class="gallery-title">Lobola Gallery</h2>
+        <div class="gallery-actions">
+          <button class="pill" onclick="openForm('Lobola')"><i class="ri-send-plane-2-line"></i> Request Lobola</button>
+        </div>
+      </div>
+      <p class="muted">Respectful documentation of traditions, families & cultural details.</p>
+      <div class="gallery-grid">
+        <figure><img src="lobola1.jpg" alt="Lobola 1"></figure>
+        <figure><img src="lobola2.jpg" alt="Lobola 2"></figure>
+        <figure><img src="lobola3.jpg" alt="Lobola 3"></figure>
+        <figure><img src="lobola4.jpg" alt="Lobola 4"></figure>
+        <figure><img src="lobola5.jpg" alt="Lobola 5"></figure>
+        <figure><img src="lobola6.jpg" alt="Lobola 6"></figure>
+        <figure><img src="lobola7.jpg" alt="Lobola 7"></figure>
+        <figure><img src="lobola8.jpg" alt="Lobola 8"></figure>
+        <figure><img src="lobola9.jpg" alt="Lobola 9"></figure>
+        <figure><img src="lobola10.jpg" alt="Lobola 10"></figure>
+        <figure><img src="lobola11.jpg" alt="Lobola 11"></figure>
+        <figure><img src="lobola12.jpg" alt="Lobola 12"></figure>
+        <figure><img src="lobola13.jpg" alt="Lobola 13"></figure>
+      </div>
+
+    </section>
+
+    <!-- Potraits -->
+    <section id="individuals" class="gallery-section">
+      <div class="gallery-header">
+        <h2 class="gallery-title">Potraits Gallery</h2>
+        <div class="gallery-actions">
+          <button class="pill" onclick="openForm('Potraits')"><i class="ri-send-plane-2-line"></i> Request
+            Potraits</button>
+        </div>
+      </div>
+      <p class="muted">Solo portraits, lifestyle sets & creative concepts that reflect you.</p>
+      <div class="gallery-grid">
+        <figure><img src="potrait100.jpg" alt="Potrait 100"></figure>
+        <figure><img src="potrait101.jpg" alt="Potrait 101"></figure>
+        <figure><img src="potrait102.jpg" alt="Potrait 102"></figure>
+        <figure><img src="potrait103.jpg" alt="Potrait 103"></figure>
+        <figure><img src="potrait104.jpg" alt="Potrait 104"></figure>
+        <figure><img src="potrait105.jpg" alt="Potrait 105"></figure>
+        <figure><img src="potrait106.jpg" alt="Potrait 106"></figure>
+        <figure><img src="potrait107.jpg" alt="Potrait 107"></figure>
+        <figure><img src="potrait108.jpg" alt="Potrait 108"></figure>
+        <figure><img src="potrait109.jpg" alt="Potrait 109"></figure>
+        <figure><img src="potrait110.jpg" alt="Potrait 110"></figure>
+        <figure><img src="potrait111.jpg" alt="Potrait 111"></figure>
+        <figure><img src="potrait112.jpg" alt="Potrait 112"></figure>
+        <figure><img src="potrait113.jpg" alt="Potrait 113"></figure>
+        <figure><img src="potrait114.jpg" alt="Potrait 114"></figure>
+        <figure><img src="potrait115.jpg" alt="Potrait 115"></figure>
+        <figure><img src="potrait116.jpg" alt="Potrait 116"></figure>
+        <figure><img src="potrait117.jpg" alt="Potrait 117"></figure>
+        <figure><img src="potrait118.jpg" alt="Potrait 118"></figure>
+        <figure><img src="potrait119.jpg" alt="Potrait 119"></figure>
+        <figure><img src="potrait120.jpg" alt="Potrait 120"></figure>
+        <figure><img src="potrait121.jpg" alt="Potrait 121"></figure>
+        <figure><img src="potrait122.jpg" alt="Potrait 122"></figure>
+        <figure><img src="potrait123.jpg" alt="Potrait 123"></figure>
+        <figure><img src="potrait124.jpg" alt="Potrait 124"></figure>
+        <figure><img src="potrait125.jpg" alt="Potrait 125"></figure>
+        <figure><img src="potrait126.jpg" alt="Potrait 126"></figure>
+        <figure><img src="potrait127.jpg" alt="Potrait 127"></figure>
+        <figure><img src="potrait128.jpg" alt="Potrait 128"></figure>
+        <figure><img src="potrait129.jpg" alt="Potrait 129"></figure>
+        <figure><img src="potrait130.jpg" alt="Potrait 130"></figure>
+        <figure><img src="potrait131.jpg" alt="Potrait 131"></figure>
+        <figure><img src="potrait132.jpg" alt="Potrait 132"></figure>
+        <figure><img src="potrait133.jpg" alt="Potrait 133"></figure>
+        <figure><img src="potrait134.jpg" alt="Potrait 134"></figure>
+        <figure><img src="potrait135.jpg" alt="Potrait 135"></figure>
+        <figure><img src="potrait136.jpg" alt="Potrait 136"></figure>
+        <figure><img src="potrait137.jpg" alt="Potrait 137"></figure>
+        <figure><img src="potrait138.jpg" alt="Potrait 138"></figure>
+        <figure><img src="potrait139.jpg" alt="Potrait 139"></figure>
+        <figure><img src="potrait140.jpg" alt="Potrait 140"></figure>
+        <figure><img src="potrait141.jpg" alt="Potrait 141"></figure>
+        <figure><img src="potrait142.jpg" alt="Potrait 142"></figure>
+        <figure><img src="potrait143.jpg" alt="Potrait 143"></figure>
+        <figure><img src="potrait144.jpg" alt="Potrait 144"></figure>
+        <figure><img src="potrait145.jpg" alt="Potrait 145"></figure>
+        <figure><img src="potrait146.jpg" alt="Potrait 146"></figure>
+        <figure><img src="potrait147.jpg" alt="Potrait 147"></figure>
+        <figure><img src="potrait148.jpg" alt="Potrait 148"></figure>
+        <figure><img src="potrait149.jpg" alt="Potrait 149"></figure>
+        <figure><img src="potrait150.jpg" alt="Potrait 150"></figure>
+        <figure><img src="potrait151.jpg" alt="Potrait 151"></figure>
+        <figure><img src="potrait152.jpg" alt="Potrait 152"></figure>
+        <figure><img src="potrait153.jpg" alt="Potrait 153"></figure>
+        <figure><img src="potrait154.jpg" alt="Potrait 154"></figure>
+        <figure><img src="potrait155.jpg" alt="Potrait 155"></figure>
+        <figure><img src="potrait156.jpg" alt="Potrait 156"></figure>
+        <figure><img src="potrait157.jpg" alt="Potrait 157"></figure>
+        <figure><img src="potrait158.jpg" alt="Potrait 158"></figure>
+        <figure><img src="potrait159.jpg" alt="Potrait 159"></figure>
+        <figure><img src="potrait160.jpg" alt="Potrait 160"></figure>
+        <figure><img src="potrait161.jpg" alt="Potrait 161"></figure>
+        <figure><img src="potrait162.jpg" alt="Potrait 162"></figure>
+      </div>
+
+    </section>
+
+    <!-- Funeral -->
+    <section id="funeral" class="gallery-section">
+      <div class="gallery-header">
+        <h2 class="gallery-title">Pregnancy Photoshoot</h2>
+        <div class="gallery-actions">
+          <button class="pill" onclick="openForm('Pregnancy')"><i class="ri-send-plane-2-line"></i> Request Pregnancy
+            Photoshoot</button>
+        </div>
+      </div>
+      <p class="muted">Dignified images to honour and remember loved ones.</p>
+      <div class="gallery-grid">
+        <figure><img src="preg1.jpg" alt="Preg 1"></figure>
+        <figure><img src="preg2.jpg" alt="Preg 2"></figure>
+        <figure><img src="preg3.jpg" alt="Preg 3"></figure>
+        <figure><img src="preg4.jpg" alt="Preg 4"></figure>
+        <figure><img src="preg5.jpg" alt="Preg 5"></figure>
+        <figure><img src="preg6.jpg" alt="Preg 6"></figure>
+        <figure><img src="preg7.jpg" alt="Preg 7"></figure>
+        <figure><img src="preg8.jpg" alt="Preg 8"></figure>
+        <figure><img src="preg9.jpg" alt="Preg 9"></figure>
+        <figure><img src="preg10.jpg" alt="Preg 10"></figure>
+        <figure><img src="preg11.jpg" alt="Preg 11"></figure>
+        <figure><img src="preg12.jpg" alt="Preg 12"></figure>
+        <figure><img src="preg13.jpg" alt="Preg 13"></figure>
+        <figure><img src="preg14.jpg" alt="Preg 14"></figure>
+        <figure><img src="preg15.jpg" alt="Preg 15"></figure>
+        <figure><img src="preg16.jpg" alt="Preg 16"></figure>
+        <figure><img src="preg17.jpg" alt="Preg 17"></figure>
+        <figure><img src="preg18.jpg" alt="Preg 18"></figure>
+        <figure><img src="preg19.jpg" alt="Preg 19"></figure>
+        <figure><img src="preg20.jpg" alt="Preg 20"></figure>
+        <figure><img src="preg21.jpg" alt="Preg 21"></figure>
+        <figure><img src="preg22.jpg" alt="Preg 22"></figure>
+      </div>
+
+    </section>
+
+    <!-- Graduation -->
+    <section id="graduation" class="gallery-section">
+      <div class="gallery-header">
+        <h2 class="gallery-title">Graduation Gallery</h2>
+        <div class="gallery-actions">
+          <button class="pill" onclick="openForm('Graduation')"><i class="ri-send-plane-2-line"></i> Request
+            Graduation</button>
+        </div>
+      </div>
+      <p class="muted">Caps, gowns & proud family moments, preserved forever.</p>
+      <div class="gallery-grid">
+        <figure><img src="grad1.jpg" alt="Grad 1"></figure>
+        <figure><img src="grad2.jpg" alt="Grad 2"></figure>
+        <figure><img src="grad3.jpg" alt="Grad 3"></figure>
+        <figure><img src="grad4.jpg" alt="Grad 4"></figure>
+        <figure><img src="grad5.jpg" alt="Grad 5"></figure>
+        <figure><img src="grad6.jpg" alt="Grad 6"></figure>
+        <figure><img src="grad7.jpg" alt="Grad 7"></figure>
+        <figure><img src="grad8.jpg" alt="Grad 8"></figure>
+        <figure><img src="grad9.jpg" alt="Grad 9"></figure>
+        <figure><img src="grad10.jpg" alt="Grad 10"></figure>
+        <figure><img src="grad11.jpg" alt="Grad 11"></figure>
+        <figure><img src="grad12.jpg" alt="Grad 12"></figure>
+        <figure><img src="grad13.jpg" alt="Grad 13"></figure>
+        <figure><img src="grad14.jpg" alt="Grad 14"></figure>
+        <figure><img src="grad15.jpg" alt="Grad 15"></figure>
+        <figure><img src="grad16.jpg" alt="Grad 16"></figure>
+        <figure><img src="grad17.jpg" alt="Grad 17"></figure>
+        <figure><img src="grad18.jpg" alt="Grad 18"></figure>
+      </div>
+
+    </section>
+
+    <!-- Birthday -->
+    <section id="birthday" class="gallery-section">
+      <div class="gallery-header">
+        <h2 class="gallery-title">Birthday Gallery</h2>
+        <div class="gallery-actions">
+          <button class="pill" onclick="openForm('Birthday')"><i class="ri-send-plane-2-line"></i> Request
+            Birthday</button>
+        </div>
+      </div>
+      <p class="muted">From kids to milestones, vibrant party memories.</p>
+      <div class="gallery-grid">
+        <figure><img src="party1.jpg" alt="Birthday 1"></figure>
+        <figure><img src="party2.jpg" alt="Birthday 2"></figure>
+        <figure><img src="party3.jpg" alt="Birthday 3"></figure>
+        <figure><img src="party4.jpg" alt="Birthday 4"></figure>
+        <figure><img src="party5.jpg" alt="Birthday 5"></figure>
+        <figure><img src="party6.jpg" alt="Birthday 6"></figure>
+        <figure><img src="party7.jpg" alt="Birthday 4"></figure>
+        <figure><img src="party8.jpg" alt="Birthday 5"></figure>
+        <figure><img src="party9.jpg" alt="Birthday 6"></figure>
+      </div>
+    </section>
+  </div>
+
+  <!-- FORM MODAL (Formspree) -->
+  <div class="modal" id="formModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+      <span class="modal-close" onclick="closeForm()">&times;</span>
+      <h3 id="formTitle" style="margin:0 0 6px;">Start a Project</h3>
+      <form id="popupForm" action="https://formspree.io/f/xzzvqpwl" method="POST" style="display:grid; gap:10px;">
+        <input type="text" name="name" required placeholder="Your Name">
+        <input type="email" name="email" required placeholder="Your Email">
+        <input type="text" name="service" id="serviceField" readonly>
+        <textarea name="message" rows="4" placeholder="Tell us about your shoot..."></textarea>
+        <button class="btn" type="submit">Submit</button>
+      </form>
     </div>
-
-    <div style="height:1px; background:rgba(255,255,255,.12); margin:16px 0;"></div>
-
-    <div style="display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; color:var(--muted);">
-      <small>© <span id="year"></span> CMSTUDIOS. All rights reserved.</small>
-      <div style="display:flex; gap:12px;">
-        <a href="privacy.html" style="color:var(--muted)">Privacy Policy</a>
-        <a href="terms.html" style="color:var(--muted)">Terms & Conditions</a>
-      </div>
-    </div>
   </div>
 
-  <!-- Location Section (unchanged) -->
-<section id="location">
-  <div class="section-inner">
-    <span class="kicker reveal">Our Location</span>
-    <p class="reveal">Find us in the heart of Mpumalanga for all your creative needs.</p>
-    <div class="map-container glass reveal">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13434.234287261056!2d31.990946!3d-25.471096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ee61d798fdfd36d%3A0x3a9ed2f3e2fba8e7!2sMalelane%2C%20Mpumalanga%2C%20South%20Africa!5e0!3m2!1sen!2sza!4v1692669671234!5m2!1sen!2sza" 
-        width="100%" 
-        height="450" 
-        style="border:0; border-radius:22px;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
+  <!-- LIGHTBOX (image preview) -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <img id="lightboxImg" src="" alt="Preview">
   </div>
-</section>
 
-<!-- Footer (unchanged) -->
-<footer style="background:linear-gradient(180deg, rgba(255,255,255,.03), transparent); border-top:1px solid rgba(255,255,255,.12); padding:50px 28px 80px 110px;">
-  <div class="foot" style="width:min(1200px,100%); margin:0 auto; display:grid; gap:22px;">
-    <!-- footer content unchanged -->
+  <div class="card contact-card" data-target="contact">
+    <h3>📞 Contact Us</h3>
+    <p><strong>Phone:</strong> +27 79 629 7073 / +27 81 840 1398</p>
+    <p><strong>Email:</strong> cmstudiosza@gmail.com</p>
+    <h3>📍 Location</h3>
+    <p>Nkomazi | Malalane | Mbombela | South Africa</p>
   </div>
-</footer>
 
-<!-- Popup Form -->
-<div id="formPopup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:200;display:grid;place-items:center;">
-  <div style="background:var(--bg-2);padding:28px;border-radius:22px;width:350px;display:grid;gap:12px;position:relative;">
-    <span style="position:absolute;top:8px;right:12px;font-size:22px;cursor:pointer;color:#fff;" onclick="closeForm()">&times;</span>
-    <h3 style="margin:0;text-align:center;">Start a Project</h3>
-    <form id="popupForm" action="https://formspree.io/f/xzzvqpwl" method="POST" style="display:grid;gap:10px;">
-      <input type="text" name="name" required placeholder="Your Name" style="padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); color:#e9edf7;">
-      <input type="email" name="email" required placeholder="Your Email" style="padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); color:#e9edf7;">
-      <input type="text" name="service" id="serviceField" readonly style="padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); color:#e9edf7;">
-      <textarea name="message" placeholder="Message" rows="4" style="padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); color:#e9edf7;"></textarea>
-      <button class="btn" type="submit">Submit</button>
-    </form>
-  </div>
-</div>
 
-<script>
-  // Scroll reveal
-  const io = new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  <script>
+    // Reveal the matching gallery when a category card is clicked
+    const cards = document.querySelectorAll('.card');
+    const galleries = document.querySelectorAll('.gallery-section');
 
-  // Scrollspy for sidebar
-  const links = [...document.querySelectorAll('.nav-dot')];
-  const sections = [...document.querySelectorAll('section')];
-  const spy = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        const id = '#' + entry.target.id;
-        links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const targetId = card.getAttribute('data-target');
+        galleries.forEach(g => g.classList.remove('active'));
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.classList.add('active');
+          window.scrollTo({ top: target.offsetTop - 10, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Open Formspree modal with category prefilled
+    const formModal = document.getElementById('formModal');
+    const serviceField = document.getElementById('serviceField');
+
+    function openForm(service) {
+      serviceField.value = service;
+      formModal.classList.add('active');
+      formModal.setAttribute('aria-hidden', 'false');
+    }
+    function closeForm() {
+      formModal.classList.remove('active');
+      formModal.setAttribute('aria-hidden', 'true');
+    }
+
+    // Lightbox for images
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    document.querySelectorAll('.gallery-grid img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImg.src = '';
+    }
+
+    // Close overlays with ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeForm();
+        closeLightbox();
       }
     });
-  },{rootMargin:'-40% 0px -50% 0px', threshold:.01});
-  sections.forEach(s=>spy.observe(s));
 
-  // Popup Form Logic
-  const popup = document.getElementById('formPopup');
-  const serviceField = document.getElementById('serviceField');
-
-  document.querySelectorAll('.card').forEach(card=>{
-    card.addEventListener('click',()=>{
-      serviceField.value = card.dataset.service;
-      popup.style.display='grid';
-    });
-  });
-
-  function closeForm(){ popup.style.display='none'; }
-</script>
-
+    // Close overlays by clicking backdrop
+    formModal.addEventListener('click', (e) => { if (e.target === formModal) closeForm(); });
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  </script>
 </body>
+
 </html>
